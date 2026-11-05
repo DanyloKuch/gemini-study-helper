@@ -98,6 +98,7 @@ public class GeminiClient(HttpClient http, string apiKey, string model)
         return status switch
         {
             HttpStatusCode.TooManyRequests => "Перевищено ліміт запитів Gemini (429). Зачекай хвилину і спробуй знову.",
+            HttpStatusCode.PaymentRequired => "Закінчились кредити проєкту в AI Studio (402). Поповни баланс або візьми ключ з іншого проєкту.",
             _ when keyProblem => $"Ключ API не прийнято ({(int)status}). Перевір змінну GEMINI_API_KEY. Деталі: {detail}",
             _ => $"Помилка Gemini API ({(int)status}): {detail}"
         };
