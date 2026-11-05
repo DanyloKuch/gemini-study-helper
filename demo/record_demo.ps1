@@ -10,6 +10,10 @@ $title = "StudyHelper demo"
 
 dotnet build (Join-Path $root "StudyHelper") -v q -nologo | Out-Null
 
+# Ключ, збережений через setx, видно лише новим терміналам, тому беремо його напряму
+$userKey = [Environment]::GetEnvironmentVariable("GEMINI_API_KEY", "User")
+if ($userKey) { $env:GEMINI_API_KEY = $userKey }
+
 $inner = @"
 mode con: cols=100 lines=45
 `$Host.UI.RawUI.WindowTitle = '$title'
